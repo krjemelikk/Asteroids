@@ -1,4 +1,5 @@
-﻿using Source.Infrastructure.StateMachine;
+﻿using Source.Infrastructure.Services;
+using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States.Factory;
 using Zenject;
 
@@ -11,6 +12,8 @@ namespace Source.Infrastructure.Zenject
             GameStateMachine();
 
             StatesFactory();
+
+            CoroutineRunner();
         }
 
         private void GameStateMachine() =>
@@ -18,5 +21,13 @@ namespace Source.Infrastructure.Zenject
 
         private void StatesFactory() =>
             Container.BindInterfacesTo<StatesFactory>().AsSingle();
+
+        private void CoroutineRunner()
+        {
+            Container
+                .BindInterfacesTo<CoroutineRunner>()
+                .FromComponentInNewPrefabResource(InfrastractureAssetPath.CoroutineRunner)
+                .AsSingle();
+        }
     }
 }
