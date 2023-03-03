@@ -1,6 +1,6 @@
 ﻿namespace Source.Infrastructure.StateMachine.States
 {
-    public class BootstrapState : IState
+    public class BootstrapState : IExitableState
     {
         public void Exit()
         {

@@ -2,6 +2,6 @@
 {
     public interface IStatesFactory
     {
-        IState Create<TState>() where TState : IState;
+        IExitableState Create<TState>() where TState : IExitableState;
     }
 }

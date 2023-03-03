@@ -11,7 +11,7 @@ namespace Source.Infrastructure.StateMachine.States.Factory
             _instantiator = instantiator;
         }
 
-        public IState Create<TState>() where TState : IState
+        public IExitableState Create<TState>() where TState : IExitableState
         {
             return _instantiator.Instantiate<TState>();
         }
