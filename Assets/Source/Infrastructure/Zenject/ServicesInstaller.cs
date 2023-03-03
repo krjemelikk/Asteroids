@@ -11,6 +11,6 @@ namespace Source.Infrastructure.Zenject
         }
 
         private void GameStateMachine() =>
-            Container.BindInterfacesTo<GameStateMachine>();
+            Container.BindInterfacesTo<GameStateMachine>().AsSingle();
     }
 }
