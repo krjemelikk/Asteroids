@@ -16,6 +16,8 @@ namespace Source.Infrastructure.Zenject
             CoroutineRunner();
 
             SceneLoader();
+
+            InputService();
         }
 
         private void GameStateMachine() =>
@@ -34,5 +36,8 @@ namespace Source.Infrastructure.Zenject
 
         private void SceneLoader() =>
             Container.BindInterfacesTo<SceneLoader>().AsSingle();
+
+        private void InputService() =>
+            Container.BindInterfacesTo<InputService>().AsSingle();
     }
 }
