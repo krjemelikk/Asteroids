@@ -14,6 +14,8 @@ namespace Source.Infrastructure.Zenject
             StatesFactory();
 
             CoroutineRunner();
+
+            SceneLoader();
         }
 
         private void GameStateMachine() =>
@@ -29,5 +31,8 @@ namespace Source.Infrastructure.Zenject
                 .FromComponentInNewPrefabResource(InfrastractureAssetPath.CoroutineRunner)
                 .AsSingle();
         }
+
+        private void SceneLoader() =>
+            Container.BindInterfacesTo<SceneLoader>().AsSingle();
     }
 }
