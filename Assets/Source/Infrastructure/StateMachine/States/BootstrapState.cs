@@ -1,13 +1,13 @@
 ﻿namespace Source.Infrastructure.StateMachine.States
 {
-    public class BootstrapState : IExitableState
+    public class BootstrapState : IState
     {
-        public void Exit()
+        public void Enter()
         {
             
         }
 
-        public void Enter()
+        public void Exit()
         {
             
         }
