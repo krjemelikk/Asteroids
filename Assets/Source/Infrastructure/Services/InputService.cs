@@ -7,13 +7,13 @@ namespace Source.Infrastructure.Services
         private const string HorizontalAxis = "Horizontal";
         private const string VerticalAxis = "Vertical";
 
-        public float Horizontal() =>
+        public float Horizontal =>
             Input.GetAxis(HorizontalAxis);
         
-        public float Vertical() =>
+        public float Vertical =>
             Input.GetAxis(VerticalAxis);
 
-        public bool IsAttackButton() =>
+        public bool IsAttackButton =>
             Input.GetKey(KeyCode.Space);
     }
 }

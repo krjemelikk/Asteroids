@@ -2,8 +2,8 @@
 {
     public interface IInputService
     {
-        float Horizontal();
-        float Vertical();
-        bool IsAttackButton();
+        float Horizontal { get; }
+        float Vertical{ get; }
+        bool IsAttackButton{ get; }
     }
 }
