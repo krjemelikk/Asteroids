@@ -1,4 +1,5 @@
-﻿using Source.Infrastructure.AssetManagement;
+﻿using Source.GameLogic.Ship;
+using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
 using UnityEngine;
 using Zenject;
