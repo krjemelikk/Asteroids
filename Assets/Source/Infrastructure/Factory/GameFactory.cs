@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Source.Infrastructure.Factory
 {
-    public class GameFactory
+    public class GameFactory : IGameFactory
     {
         private readonly IInstantiator _instantiator;
         private readonly IAssetProvider _assetProvider;
