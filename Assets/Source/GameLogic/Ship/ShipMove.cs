@@ -1,4 +1,3 @@
-using System;
 using Source.Infrastructure.Services;
 using UnityEngine;
 using Zenject;
@@ -8,8 +7,8 @@ public class ShipMove : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     private IInputService _inputService;
 
-    public float Speed { get; set; } = 500f;
-    public float RotationSpeed { get; set; } = 300f;
+    public float Speed { get; set; }
+    public float RotationSpeed { get; set; }
 
     [Inject]
     private void Construct(IInputService inputService)
