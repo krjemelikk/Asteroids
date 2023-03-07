@@ -1,4 +1,5 @@
-﻿using Source.Infrastructure.Services;
+﻿using Source.Infrastructure.AssetManagement;
+using Source.Infrastructure.Services;
 using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States.Factory;
 using Zenject;
@@ -18,6 +19,10 @@ namespace Source.Infrastructure.Zenject
             SceneLoader();
 
             InputService();
+
+            AssetProvider();
+            
+            StaticData();
         }
 
         private void GameStateMachine() =>
@@ -39,5 +44,11 @@ namespace Source.Infrastructure.Zenject
 
         private void InputService() =>
             Container.BindInterfacesTo<InputService>().AsSingle();
+
+        private void AssetProvider() =>
+            Container.BindInterfacesTo<AssetProvider>().AsSingle();
+
+        private void StaticData() =>
+            Container.BindInterfacesTo<StaticDataService>().AsSingle();
     }
 }
