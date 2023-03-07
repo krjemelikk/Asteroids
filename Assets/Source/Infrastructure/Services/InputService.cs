@@ -13,7 +13,7 @@ namespace Source.Infrastructure.Services
         public float Vertical =>
             Input.GetAxis(VerticalAxis);
 
-        public bool IsAttackButton =>
+        public bool IsAttackButtonDown =>
             Input.GetKey(KeyCode.Space);
     }
 }

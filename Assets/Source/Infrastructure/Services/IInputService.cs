@@ -4,6 +4,6 @@
     {
         float Horizontal { get; }
         float Vertical{ get; }
-        bool IsAttackButton{ get; }
+        bool IsAttackButtonDown{ get; }
     }
 }
