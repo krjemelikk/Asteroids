@@ -11,8 +11,8 @@ namespace Source.GameLogic.Ship
         private Bullet.Pool _bulletPool;
         private float _cooldown;
 
-        public float AttackCoolDown { get; set; } = 0.2f;
-        public float ShotForce { get; set; } = 500f;
+        public float AttackCoolDown { get; set; }
+        public float ShotForce { get; set; }
 
         [Inject]
         private void Construct(IInputService inputService, Bullet.Pool bulletPool)

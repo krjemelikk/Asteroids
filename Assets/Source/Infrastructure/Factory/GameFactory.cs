@@ -31,6 +31,10 @@ namespace Source.Infrastructure.Factory
             shipMove.Speed = shipData.Speed;
             shipMove.RotationSpeed = shipData.RotationSpeed;
 
+            var shipAttack = ship.GetComponent<ShipAttack>();
+            shipAttack.AttackCoolDown = shipData.AttackCoolDown;
+            shipAttack.ShotForce = shipData.ShotForce;
+
             return ship;
         }
     }

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 500
   RotationSpeed: 300
+  AttackCoolDown: 0.2
+  ShotForce: 550

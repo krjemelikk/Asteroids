@@ -7,5 +7,7 @@ namespace Source.StaticData
     {
         public float Speed;
         public float RotationSpeed;
+        public float AttackCoolDown;
+        public float ShotForce;
     }
 }
