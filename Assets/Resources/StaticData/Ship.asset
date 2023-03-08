@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae3a367a53840c6ad20009773f457c5, type: 3}
   m_Name: Ship
   m_EditorClassIdentifier: 
+  HP: 100
   Speed: 500
   RotationSpeed: 300
   AttackCoolDown: 0.2
