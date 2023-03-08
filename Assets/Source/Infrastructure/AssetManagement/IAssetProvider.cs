@@ -5,5 +5,6 @@ namespace Source.Infrastructure.AssetManagement
     public interface IAssetProvider
     {
         Object ShipPrefab();
+        Object HUDPrefab();
     }
 }

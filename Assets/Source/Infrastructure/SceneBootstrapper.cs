@@ -1,4 +1,5 @@
-﻿using Source.GameLogic.Ship;
+﻿using Source.GameLogic;
+using Source.GameLogic.Ship;
 using Source.Infrastructure.Factory;
 using Source.Infrastructure.StateMachine;
 using UnityEngine;
@@ -27,7 +28,14 @@ namespace Source.Infrastructure
 
         private void InitGameWorld()
         {
-            _gameFactory.CreateShip(InitialPoint.position);
+            InitShip();
+            InitHUD();
         }
+
+        private void InitShip() =>
+            _gameFactory.CreateShip(InitialPoint.position);
+
+        private void InitHUD() =>
+            _gameFactory.CreateHUD();
     }
 }
