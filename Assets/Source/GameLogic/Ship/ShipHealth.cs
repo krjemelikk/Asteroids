@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Source.GameLogic.Ship
 {
-    public class ShipHealth : MonoBehaviour, IDamageable
+    public class ShipHealth : MonoBehaviour, IHealth
     {
         private float _currentHp;
         

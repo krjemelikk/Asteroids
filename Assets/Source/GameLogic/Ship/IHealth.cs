@@ -1,8 +1,8 @@
 using System;
 
-namespace Source.GameLogic
+namespace Source.GameLogic.Ship
 {
-    public interface IDamageable
+    public interface IHealth
     {
         float MaxHp { get; set; }
         float CurrentHp { get; set; }
