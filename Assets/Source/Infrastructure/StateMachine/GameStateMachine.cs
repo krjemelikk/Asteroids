@@ -21,8 +21,9 @@ namespace Source.Infrastructure.StateMachine
 
         public void Initialize()
         {
-            _states.Add(typeof(BootstrapState), _statesFactory.Create<BootstrapState>());
-            _states.Add(typeof(LoadLevelState), _statesFactory.Create<LoadLevelState>());
+            RegisterState<BootstrapState>();
+            RegisterState<LoadLevelState>();
+            RegisterState<GameLoopState>();
         }
 
         public void Enter<TState>() where TState : IState
@@ -48,5 +49,8 @@ namespace Source.Infrastructure.StateMachine
 
         private TState GetState<TState>() where TState : IExitableState =>
             (TState)_states[typeof(TState)];
+
+        private void RegisterState<TState>() where TState : IExitableState =>
+            _states.Add(typeof(TState), _statesFactory.Create<TState>());
     }
 }

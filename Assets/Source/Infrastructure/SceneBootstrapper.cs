@@ -1,7 +1,6 @@
-﻿using Source.GameLogic;
-using Source.GameLogic.Ship;
-using Source.Infrastructure.Factory;
+﻿using Source.Infrastructure.Factory;
 using Source.Infrastructure.StateMachine;
+using Source.Infrastructure.StateMachine.States;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +23,7 @@ namespace Source.Infrastructure
         private void Start()
         {
             InitGameWorld();
+            _gameStateMachine.Enter<GameLoopState>();
         }
 
         private void InitGameWorld()
