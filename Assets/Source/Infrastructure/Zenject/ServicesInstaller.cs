@@ -23,6 +23,8 @@ namespace Source.Infrastructure.Zenject
             AssetProvider();
             
             StaticData();
+
+            RandomService();
         }
 
         private void GameStateMachine() =>
@@ -50,5 +52,8 @@ namespace Source.Infrastructure.Zenject
 
         private void StaticData() =>
             Container.BindInterfacesTo<StaticDataService>().AsSingle();
+
+        private void RandomService() =>
+            Container.BindInterfacesTo<RandomService>().AsSingle();
     }
 }
