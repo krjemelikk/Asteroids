@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Source.GameLogic.Asteroids;
+using UnityEngine;
 
 namespace Source.Infrastructure.AssetManagement
 {
@@ -6,5 +7,6 @@ namespace Source.Infrastructure.AssetManagement
     {
         Object ShipPrefab();
         Object HUDPrefab();
+        Object AsteroidPrefab(AsteroidTypeId typeId);
     }
 }

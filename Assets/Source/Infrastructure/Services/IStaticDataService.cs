@@ -1,4 +1,5 @@
-﻿using Source.StaticData;
+﻿using Source.GameLogic.Asteroids;
+using Source.StaticData;
 
 namespace Source.Infrastructure.Services
 {
@@ -6,5 +7,6 @@ namespace Source.Infrastructure.Services
     { 
         ShipData ForShip();
         BulletData ForBullet();
+        AsteroidData ForAsteroid(AsteroidTypeId id);
     }
 }

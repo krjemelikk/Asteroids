@@ -1,4 +1,5 @@
-﻿using Source.GameLogic.Weapon;
+﻿using Source.GameLogic.Asteroids;
+using Source.GameLogic.Weapon;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Factory;
 using Zenject;
@@ -14,6 +15,8 @@ namespace Source.Infrastructure.Zenject
             GameFactory();
 
             BulletPool();
+
+            AsteroidSpawner();
         }
 
         private void GameFactory() =>
@@ -24,7 +27,10 @@ namespace Source.Infrastructure.Zenject
             Container
                 .BindMemoryPool<Bullet, Bullet.Pool>()
                 .FromComponentInNewPrefabResource(AssetAddress.BulletPrefabPath)
-                .UnderTransformGroup(BulletPoolTransform);
+                .UnderTransformGroup(BulletPoolTransform).AsSingle();
         }
+
+        private void AsteroidSpawner() =>
+            Container.BindInterfacesTo<AsteroidSpawner>().AsSingle();
     }
 }

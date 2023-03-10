@@ -1,4 +1,5 @@
 ﻿using Source.GameLogic;
+using Source.GameLogic.Asteroids;
 using Source.GameLogic.Ship;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
@@ -24,7 +25,6 @@ namespace Source.Infrastructure.Factory
         public GameObject CreateShip(Vector3 at)
         {
             var shipPrefab = _assetProvider.ShipPrefab();
-            
             var ship = _diContainer.InstantiatePrefab(shipPrefab, at, Quaternion.identity, null);
             
             var shipData = _staticDataService.ForShip();
@@ -41,7 +41,7 @@ namespace Source.Infrastructure.Factory
             shipHealth.MaxHp = shipData.HP;
             shipHealth.CurrentHp = shipData.HP;
             
-            _diContainer.Bind<IDamageable>().FromInstance(shipHealth);
+            _diContainer.Bind<IHealth>().FromInstance(shipHealth);
 
             return ship;
         }
@@ -50,6 +50,20 @@ namespace Source.Infrastructure.Factory
         {
             var hudPrefab = _assetProvider.HUDPrefab();
             return _diContainer.InstantiatePrefab(hudPrefab);
+        }
+
+        public GameObject CreateAsteroid(AsteroidTypeId id, Vector3 at)
+        {
+            var asteroidPrefab = _assetProvider.AsteroidPrefab(id);
+            var asteroid = _diContainer.InstantiatePrefab(asteroidPrefab, at, Quaternion.identity, null);
+
+            var asteroidData = _staticDataService.ForAsteroid(id);
+
+            var asteroidAttack = asteroid.GetComponent<AsteroidAttack>();
+            asteroidAttack.Damage = asteroidData.Damage;
+
+            return asteroid;
+
         }
     }
 }
