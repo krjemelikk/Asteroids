@@ -1,4 +1,6 @@
-﻿using Source.Infrastructure.Services;
+﻿using System;
+using Source.GameLogic.Asteroids;
+using Source.Infrastructure.Services;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +22,15 @@ namespace Source.GameLogic.Weapon
             if (LifeTimeIsOver())
             {
                 _memoryPool.Despawn(this);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<AsteroidAttack>(out AsteroidAttack attack))
+            {
+                Destroy(other.gameObject);
+                _memoryPool?.Despawn(this);
             }
         }
 
@@ -54,6 +65,7 @@ namespace Source.GameLogic.Weapon
 
             protected override void OnDespawned(Bullet item)
             {
+                item._memoryPool = null;
                 item.gameObject.SetActive(false);
                 item._elapsedTimeAfterSpawn = 0;
             }
