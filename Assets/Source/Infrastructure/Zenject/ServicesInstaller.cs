@@ -1,4 +1,5 @@
-﻿using Source.Infrastructure.AssetManagement;
+﻿using Source.GameLogic;
+using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
 using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States.Factory;
@@ -25,6 +26,8 @@ namespace Source.Infrastructure.Zenject
             StaticData();
 
             RandomService();
+
+            LoadingCurtain();
         }
 
         private void GameStateMachine() =>
@@ -55,5 +58,13 @@ namespace Source.Infrastructure.Zenject
 
         private void RandomService() =>
             Container.BindInterfacesTo<RandomService>().AsSingle();
+
+        private void LoadingCurtain()
+        {
+            Container
+                .Bind<LoadingCurtain>()
+                .FromComponentInNewPrefabResource(InfrastractureAssetPath.LoadingCurtain)
+                .AsSingle();
+        }
     }
 }

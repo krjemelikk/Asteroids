@@ -2,6 +2,7 @@
 {
     public class InfrastractureAssetPath
     {
-        public const string CoroutineRunner = "CoroutineRunner";
+        public const string CoroutineRunner = "Infrastructure/CoroutineRunner";
+        public const string LoadingCurtain = "Infrastructure/LoadingCurtain";
     }
 }
