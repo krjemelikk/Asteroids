@@ -9,8 +9,8 @@ namespace Source.GameLogic.Asteroids
         [SerializeField] private Rigidbody2D _rigidbody;
         private IRandomService _randomService;
 
-        public float MaxSpeed { get; set; } = 200;
-        public float MinSpeed { get; set; } = 100;
+        public float MaxSpeed { get; set; }
+        public float MinSpeed { get; set; }
 
 
         [Inject]

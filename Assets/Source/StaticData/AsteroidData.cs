@@ -6,5 +6,7 @@ namespace Source.StaticData
     public class AsteroidData : ScriptableObject
     {
         public float Damage;
+        public float MaxSpeed;
+        public float MinSpeed;
     }
 }

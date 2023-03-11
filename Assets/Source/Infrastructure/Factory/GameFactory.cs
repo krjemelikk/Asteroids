@@ -1,5 +1,4 @@
-﻿using Source.GameLogic;
-using Source.GameLogic.Asteroids;
+﻿using Source.GameLogic.Asteroids;
 using Source.GameLogic.Ship;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
@@ -61,6 +60,10 @@ namespace Source.Infrastructure.Factory
 
             var asteroidAttack = asteroid.GetComponent<AsteroidAttack>();
             asteroidAttack.Damage = asteroidData.Damage;
+
+            var asteroidMove = asteroid.GetComponent<AsteroidMove>();
+            asteroidMove.MaxSpeed = asteroidData.MaxSpeed;
+            asteroidMove.MinSpeed = asteroidData.MinSpeed;
 
             return asteroid;
 

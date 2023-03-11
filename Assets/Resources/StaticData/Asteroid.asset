@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565ba581327f4b5bb0befc8fbf9f3a9d, type: 3}
   m_Name: Asteroid
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 35
+  MaxSpeed: 250
+  MinSpeed: 150
