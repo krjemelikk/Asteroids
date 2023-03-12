@@ -27,7 +27,7 @@ namespace Source.GameLogic.Weapon
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<AsteroidAttack>(out AsteroidAttack attack))
+            if (other.TryGetComponent<Asteroid>(out Asteroid attack))
             {
                 Destroy(other.gameObject);
                 _memoryPool?.Despawn(this);

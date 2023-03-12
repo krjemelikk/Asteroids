@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565ba581327f4b5bb0befc8fbf9f3a9d, type: 3}
   m_Name: BigAsteroid
   m_EditorClassIdentifier: 
+  LifeTime: 15
   Damage: 70
   MaxSpeed: 200
   MinSpeed: 100

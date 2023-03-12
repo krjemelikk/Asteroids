@@ -58,8 +58,9 @@ namespace Source.Infrastructure.Factory
 
             var asteroidData = _staticDataService.ForAsteroid(id);
 
-            var asteroidAttack = asteroid.GetComponent<AsteroidAttack>();
-            asteroidAttack.Damage = asteroidData.Damage;
+            var asteroidComponent = asteroid.GetComponent<Asteroid>();
+            asteroidComponent.Damage = asteroidData.Damage;
+            asteroidComponent.LifeTime = asteroidData.LifeTime;
 
             var asteroidMove = asteroid.GetComponent<AsteroidMove>();
             asteroidMove.MaxSpeed = asteroidData.MaxSpeed;
