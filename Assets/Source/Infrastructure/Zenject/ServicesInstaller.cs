@@ -22,7 +22,7 @@ namespace Source.Infrastructure.Zenject
             InputService();
 
             AssetProvider();
-            
+
             StaticData();
 
             RandomService();

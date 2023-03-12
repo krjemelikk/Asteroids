@@ -15,7 +15,7 @@ namespace Source.Infrastructure.StateMachine.States
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
         }
-        
+
         public void Enter(string sceneName)
         {
             _loadingCurtain.Show();
@@ -29,7 +29,6 @@ namespace Source.Infrastructure.StateMachine.States
 
         private void onLoaded()
         {
-            
         }
     }
 }

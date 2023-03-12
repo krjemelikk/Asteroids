@@ -11,7 +11,6 @@ namespace Source.Infrastructure.StateMachine.States
 
         public void Enter()
         {
-
         }
     }
 }

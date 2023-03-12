@@ -24,7 +24,7 @@ namespace Source.GameLogic.Ship
         private void Update()
         {
             UpdateCooldown();
-            
+
             if (_inputService.IsAttackButtonDown && CanAttack())
             {
                 Shoot();
@@ -34,10 +34,10 @@ namespace Source.GameLogic.Ship
         private void Shoot()
         {
             var bullet = _bulletPool.Spawn();
-            
+
             SetPosition(bullet);
             bullet.Rigidbody2D.AddForce(transform.up * ShotForce);
-            
+
             ResetCooldown();
         }
 
@@ -46,7 +46,7 @@ namespace Source.GameLogic.Ship
 
         private void UpdateCooldown()
         {
-            if(!CooldownIsUp())
+            if (!CooldownIsUp())
                 _cooldown -= Time.deltaTime;
         }
 

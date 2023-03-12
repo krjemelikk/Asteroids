@@ -25,21 +25,21 @@ namespace Source.Infrastructure.Factory
         {
             var shipPrefab = _assetProvider.ShipPrefab();
             var ship = _diContainer.InstantiatePrefab(shipPrefab, at, Quaternion.identity, null);
-            
+
             var shipData = _staticDataService.ForShip();
-            
+
             var shipMove = ship.GetComponent<ShipMove>();
             shipMove.Speed = shipData.Speed;
             shipMove.RotationSpeed = shipData.RotationSpeed;
-            
+
             var shipAttack = ship.GetComponent<ShipAttack>();
             shipAttack.AttackCoolDown = shipData.AttackCoolDown;
             shipAttack.ShotForce = shipData.ShotForce;
-            
+
             var shipHealth = ship.GetComponent<ShipHealth>();
             shipHealth.MaxHp = shipData.HP;
             shipHealth.CurrentHp = shipData.HP;
-            
+
             _diContainer.Bind<IHealth>().FromInstance(shipHealth);
 
             return ship;
@@ -67,7 +67,6 @@ namespace Source.Infrastructure.Factory
             asteroidMove.MinSpeed = asteroidData.MinSpeed;
 
             return asteroid;
-
         }
     }
 }

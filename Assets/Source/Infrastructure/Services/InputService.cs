@@ -9,7 +9,7 @@ namespace Source.Infrastructure.Services
 
         public float Horizontal =>
             Input.GetAxis(HorizontalAxis);
-        
+
         public float Vertical =>
             Input.GetAxis(VerticalAxis);
 

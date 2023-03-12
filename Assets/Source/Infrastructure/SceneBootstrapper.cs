@@ -9,7 +9,7 @@ namespace Source.Infrastructure
     public class SceneBootstrapper : MonoBehaviour
     {
         [SerializeField] private Transform InitialPoint;
-        
+
         private IGameStateMachine _gameStateMachine;
         private IGameFactory _gameFactory;
 

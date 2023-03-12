@@ -32,7 +32,7 @@ namespace Source.Infrastructure.Services
             {
                 yield return null;
             }
-            
+
             OnLoaded?.Invoke();
         }
     }

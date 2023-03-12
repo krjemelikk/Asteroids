@@ -3,7 +3,7 @@
     public interface IInputService
     {
         float Horizontal { get; }
-        float Vertical{ get; }
-        bool IsAttackButtonDown{ get; }
+        float Vertical { get; }
+        bool IsAttackButtonDown { get; }
     }
 }
