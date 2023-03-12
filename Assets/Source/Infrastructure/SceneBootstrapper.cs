@@ -1,4 +1,6 @@
-﻿using Source.Infrastructure.Factory;
+﻿using Source.GameLogic.Ship;
+using Source.Infrastructure.Factory;
+using Source.Infrastructure.Services;
 using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States;
 using UnityEngine;
@@ -12,30 +14,36 @@ namespace Source.Infrastructure
 
         private IGameStateMachine _gameStateMachine;
         private IGameFactory _gameFactory;
+        private IGameplayModeService _gameplayModeService;
 
         [Inject]
-        private void Construct(IGameStateMachine gameStateMachine, IGameFactory gameFactory)
+        private void Construct(IGameStateMachine gameStateMachine, IGameFactory gameFactory,
+            IGameplayModeService gameplayModeService)
         {
             _gameStateMachine = gameStateMachine;
             _gameFactory = gameFactory;
+            _gameplayModeService = gameplayModeService;
         }
 
         private void Start()
         {
-            InitGameWorld();
-            _gameStateMachine.Enter<GameLoopState>();
+            var sessionConfig = InitGameWorld();
+
+            _gameStateMachine.Enter<GameLoopState, GameSessionConfig>(sessionConfig);
         }
 
-        private void InitGameWorld()
+        private GameSessionConfig InitGameWorld()
         {
-            InitShip();
+            var ship = InitShip();
             InitHUD();
+            
+            return new GameSessionConfig(ship.GetComponent<IHealth>());
         }
 
-        private void InitShip() =>
+        private GameObject InitShip() =>
             _gameFactory.CreateShip(InitialPoint.position);
 
-        private void InitHUD() =>
+        private GameObject InitHUD() =>
             _gameFactory.CreateHUD();
     }
 }

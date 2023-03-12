@@ -28,6 +28,8 @@ namespace Source.Infrastructure.Zenject
             RandomService();
 
             LoadingCurtain();
+
+            GameplayModeService();
         }
 
         private void GameStateMachine() =>
@@ -66,5 +68,8 @@ namespace Source.Infrastructure.Zenject
                 .FromComponentInNewPrefabResource(InfrastractureAssetPath.LoadingCurtain)
                 .AsSingle();
         }
+
+        private void GameplayModeService() =>
+            Container.BindInterfacesTo<GameplayModeService>().AsSingle();
     }
 }
