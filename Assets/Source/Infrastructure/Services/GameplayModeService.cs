@@ -11,9 +11,9 @@
             _gameSessionConfig = null;
 
         public bool IsSessionEnd() =>
-            IsPlayerAlive();
+            !IsPlayerAlive();
 
         private bool IsPlayerAlive()
-            => _gameSessionConfig.Player.CurrentHp <= 0;
+            => _gameSessionConfig.Player.CurrentHp > 0;
     }
 }

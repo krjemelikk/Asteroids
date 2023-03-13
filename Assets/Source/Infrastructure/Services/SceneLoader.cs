@@ -20,12 +20,6 @@ namespace Source.Infrastructure.Services
 
         private IEnumerator Load(string sceneName, Action OnLoaded)
         {
-            if (SceneManager.GetActiveScene().name == sceneName)
-            {
-                OnLoaded.Invoke();
-                yield break;
-            }
-
             var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
             while (!asyncOperation.isDone)

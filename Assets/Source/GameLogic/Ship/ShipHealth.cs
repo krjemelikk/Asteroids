@@ -22,10 +22,15 @@ namespace Source.GameLogic.Ship
 
         public void TakeDamage(float damage)
         {
-            if (CurrentHp <= 0)
-                return;
-
             CurrentHp -= damage;
+            
+            if (CurrentHp <= 0)
+                Die();
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }

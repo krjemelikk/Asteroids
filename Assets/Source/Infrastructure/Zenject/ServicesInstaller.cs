@@ -30,6 +30,8 @@ namespace Source.Infrastructure.Zenject
             LoadingCurtain();
 
             GameplayModeService();
+
+            GameOverScreen();
         }
 
         private void GameStateMachine() =>
@@ -71,5 +73,13 @@ namespace Source.Infrastructure.Zenject
 
         private void GameplayModeService() =>
             Container.BindInterfacesTo<GameplayModeService>().AsSingle();
+
+        private void GameOverScreen()
+        {
+            Container
+                .Bind<GameOverScreen>()
+                .FromComponentInNewPrefabResource(InfrastractureAssetPath.GameOverScreen)
+                .AsSingle();
+        }
     }
 }

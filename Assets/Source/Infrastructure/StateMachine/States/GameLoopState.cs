@@ -24,7 +24,7 @@ namespace Source.Infrastructure.StateMachine.States
         {
             if (_gameplayModeService.IsSessionEnd())
             {
-                
+                _stateMachine.Enter<EndGameSessionState>();
             }
         }
     }

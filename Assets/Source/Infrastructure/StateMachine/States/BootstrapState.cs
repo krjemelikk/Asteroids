@@ -11,11 +11,12 @@
 
         public void Enter()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>("Main");
+            _gameStateMachine.Enter<LoadLevelState, string>(SceneName.Main);
         }
 
         public void Exit()
         {
+            
         }
     }
 }

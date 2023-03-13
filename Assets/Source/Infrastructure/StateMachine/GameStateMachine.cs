@@ -6,12 +6,13 @@ using Zenject;
 
 namespace Source.Infrastructure.StateMachine
 {
-    public class GameStateMachine : IGameStateMachine, IInitializable
+    public class GameStateMachine : IGameStateMachine, ITickable, IInitializable
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private readonly IStatesFactory _statesFactory;
 
         private IExitableState _activeState;
+        private ITickable _activeTickableState;
 
         public GameStateMachine(IStatesFactory statesFactory)
         {
@@ -24,6 +25,7 @@ namespace Source.Infrastructure.StateMachine
             RegisterState<BootstrapState>();
             RegisterState<LoadLevelState>();
             RegisterState<GameLoopState>();
+            RegisterState<EndGameSessionState>();
         }
 
         public void Enter<TState>() where TState : IState
@@ -38,11 +40,17 @@ namespace Source.Infrastructure.StateMachine
             state.Enter(config);
         }
 
+        public void Tick()
+        {
+            _activeTickableState?.Tick();
+        }
+
         private TState ChangeState<TState>() where TState : IExitableState
         {
             var state = GetState<TState>();
             _activeState?.Exit();
             _activeState = state;
+            _activeTickableState = state as ITickable;
 
             return state;
         }

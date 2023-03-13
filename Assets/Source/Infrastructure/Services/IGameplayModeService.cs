@@ -1,6 +1,4 @@
-﻿using Source.GameLogic.Ship;
-
-namespace Source.Infrastructure.Services
+﻿namespace Source.Infrastructure.Services
 {
     public interface IGameplayModeService
     {
