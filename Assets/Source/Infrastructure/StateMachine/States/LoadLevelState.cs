@@ -1,5 +1,4 @@
-﻿using Source.GameLogic;
-using Source.Infrastructure.Services;
+﻿using Source.Infrastructure.Services;
 
 namespace Source.Infrastructure.StateMachine.States
 {
@@ -19,16 +18,12 @@ namespace Source.Infrastructure.StateMachine.States
         public void Enter(string sceneName)
         {
             _loadingCurtain.Show();
-            _sceneLoader.LoadScene(sceneName, onLoaded);
+            _sceneLoader.LoadScene(sceneName,null);
         }
 
         public void Exit()
         {
             _loadingCurtain.Hide();
-        }
-
-        private void onLoaded()
-        {
         }
     }
 }
