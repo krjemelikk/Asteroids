@@ -1,4 +1,5 @@
-﻿using Source.GameLogic.Ship;
+﻿using Source.GameLogic.Asteroids;
+using Source.GameLogic.Ship;
 using Source.Infrastructure.Factory;
 using Source.Infrastructure.Services;
 using Source.Infrastructure.StateMachine;
@@ -35,15 +36,19 @@ namespace Source.Infrastructure
         private GameSessionConfig InitGameWorld()
         {
             var ship = InitShip();
-            InitHUD();
-            
+            InitHUD(ship.GetComponent<IHealth>());
+
             return new GameSessionConfig(ship.GetComponent<IHealth>());
         }
 
         private GameObject InitShip() =>
             _gameFactory.CreateShip(InitialPoint.position);
 
-        private GameObject InitHUD() =>
-            _gameFactory.CreateHUD();
+        private GameObject InitHUD(IHealth playerHealth)
+        {
+            var hud =  _gameFactory.CreateHUD();
+            hud.GetComponent<ActorUI>().Init(playerHealth);
+            return hud;
+        }
     }
 }
