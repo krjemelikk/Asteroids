@@ -8,5 +8,6 @@ namespace Source.Infrastructure.Services
         ShipData ForShip();
         BulletData ForBullet();
         AsteroidData ForAsteroid(AsteroidTypeId id);
+        AsteroidSpawnerData ForSpawner();
     }
 }

@@ -2,6 +2,8 @@
 using Source.GameLogic.Weapon;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Factory;
+using Source.Infrastructure.Services;
+using Source.StaticData;
 using Zenject;
 
 namespace Source.Infrastructure.Zenject
@@ -15,8 +17,8 @@ namespace Source.Infrastructure.Zenject
             GameFactory();
 
             BulletPool();
-
-            AsteroidSpawner();
+            
+            AsteroidSpawner(DataForSpawner());
         }
 
         private void GameFactory() =>
@@ -30,7 +32,15 @@ namespace Source.Infrastructure.Zenject
                 .UnderTransformGroup(BulletPoolTransform).AsSingle();
         }
 
-        private void AsteroidSpawner() =>
-            Container.BindInterfacesTo<AsteroidSpawner>().AsSingle();
+        private void AsteroidSpawner(AsteroidSpawnerData data)
+        {
+            Container
+                .BindInterfacesTo<AsteroidSpawner>()
+                .AsSingle()
+                .WithArguments(data);
+        }
+
+        private AsteroidSpawnerData DataForSpawner() =>
+            Container.Resolve<IStaticDataService>().ForSpawner();
     }
 }

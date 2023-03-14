@@ -1,6 +1,8 @@
 ﻿using System;
 using Source.Infrastructure.Factory;
 using Source.Infrastructure.Services;
+using Source.Infrastructure.Zenject;
+using Source.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -12,15 +14,19 @@ namespace Source.GameLogic.Asteroids
         private readonly IGameFactory _gameFactory;
         private readonly IRandomService _randomService;
 
-        private float _spawnRadius = 15f;
-        private float _spawnCooldown = 0.5f;
         private float _cooldown;
+        public float SpawnRadius { get; set; }
+        public float SpawnCooldown { get; set; }
 
-        public AsteroidSpawner(IGameFactory gameFactory, IRandomService randomService)
+
+        public AsteroidSpawner(IGameFactory gameFactory, IRandomService randomService, AsteroidSpawnerData data)
         {
             _asteroids = Enum.GetValues(typeof(AsteroidTypeId));
             _gameFactory = gameFactory;
             _randomService = randomService;
+
+            SpawnRadius = data.SpawnRadius;
+            SpawnCooldown = data.SpawnCooldown;
         }
 
         public void Tick()
@@ -29,9 +35,10 @@ namespace Source.GameLogic.Asteroids
 
             if (CooldownIsUp())
             {
-                Spawn(RandomAsteroidType(), RandomPosition(_spawnRadius));
+                Spawn(RandomAsteroidType(), RandomPosition(SpawnRadius));
             }
         }
+
 
         private void Spawn(AsteroidTypeId typeId, Vector3 position)
         {
@@ -55,7 +62,7 @@ namespace Source.GameLogic.Asteroids
             _cooldown <= 0;
 
         private void ResetCooldown() =>
-            _cooldown = _spawnCooldown;
+            _cooldown = SpawnCooldown;
 
         private void UpdateCooldown()
         {

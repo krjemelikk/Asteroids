@@ -10,6 +10,7 @@ namespace Source.Infrastructure.Services
         private const string BulletDataPath = "StaticData/Bullet";
         private const string AsteroidDataPath = "StaticData/Asteroid";
         private const string BigAsteroidDataPath = "StaticData/BigAsteroid";
+        private const string AsteroidSpawnerDataPath = "StaticData/AsteroidSpawner";
 
         public ShipData ForShip() =>
             Resources.Load<ShipData>(ShipDataPath);
@@ -19,6 +20,9 @@ namespace Source.Infrastructure.Services
 
         public AsteroidData ForAsteroid(AsteroidTypeId id) =>
             Resources.Load<AsteroidData>(AsteroidPath(id));
+
+        public AsteroidSpawnerData ForSpawner() =>
+            Resources.Load<AsteroidSpawnerData>(AsteroidSpawnerDataPath);
 
         private string AsteroidPath(AsteroidTypeId id)
         {
