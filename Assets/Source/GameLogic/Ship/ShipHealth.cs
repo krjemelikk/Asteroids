@@ -1,30 +1,18 @@
-using System;
+using UniRx;
 using UnityEngine;
 
 namespace Source.GameLogic.Ship
 {
     public class ShipHealth : MonoBehaviour, IHealth
     {
-        private float _currentHp;
-
-        public event Action HealthChanged;
         public float MaxHp { get; set; }
-
-        public float CurrentHp
-        {
-            get => _currentHp;
-            set
-            {
-                _currentHp = value;
-                HealthChanged?.Invoke();
-            }
-        }
+        public FloatReactiveProperty CurrentHp { get; set; } = new();
 
         public void TakeDamage(float damage)
         {
-            CurrentHp -= damage;
-            
-            if (CurrentHp <= 0)
+            CurrentHp.Value -= damage;
+
+            if (CurrentHp.Value <= 0)
                 Die();
         }
 

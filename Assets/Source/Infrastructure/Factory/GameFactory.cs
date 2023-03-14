@@ -38,7 +38,7 @@ namespace Source.Infrastructure.Factory
 
             var shipHealth = ship.GetComponent<ShipHealth>();
             shipHealth.MaxHp = shipData.HP;
-            shipHealth.CurrentHp = shipData.HP;
+            shipHealth.CurrentHp.Value = shipData.HP;
 
             return ship;
         }

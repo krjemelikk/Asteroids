@@ -14,6 +14,6 @@
             !IsPlayerAlive();
 
         private bool IsPlayerAlive()
-            => _gameSessionConfig.Player.CurrentHp > 0;
+            => _gameSessionConfig.Player.CurrentHp.Value > 0;
     }
 }
