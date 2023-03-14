@@ -12,7 +12,6 @@ namespace Source.GameLogic.Asteroids
         public float MaxSpeed { get; set; }
         public float MinSpeed { get; set; }
 
-
         [Inject]
         private void Construct(IRandomService randomService)
         {

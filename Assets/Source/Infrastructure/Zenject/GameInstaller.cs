@@ -1,5 +1,4 @@
-﻿using Source.GameLogic;
-using Source.Infrastructure.AssetManagement;
+﻿using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
 using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States.Factory;
@@ -7,7 +6,7 @@ using Zenject;
 
 namespace Source.Infrastructure.Zenject
 {
-    public class ServicesInstaller : MonoInstaller
+    public class GameInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

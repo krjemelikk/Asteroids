@@ -40,8 +40,6 @@ namespace Source.Infrastructure.Factory
             shipHealth.MaxHp = shipData.HP;
             shipHealth.CurrentHp = shipData.HP;
 
-            _diContainer.Bind<IHealth>().FromInstance(shipHealth);
-
             return ship;
         }
 

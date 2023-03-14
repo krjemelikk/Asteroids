@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Source.Infrastructure.StateMachine.States
+﻿namespace Source.Infrastructure.StateMachine.States
 {
     public class EndGameSessionState : IState
     {

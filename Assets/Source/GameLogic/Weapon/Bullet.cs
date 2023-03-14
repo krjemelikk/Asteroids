@@ -1,5 +1,4 @@
-﻿using System;
-using Source.GameLogic.Asteroids;
+﻿using Source.GameLogic.Asteroids;
 using Source.Infrastructure.Services;
 using UnityEngine;
 using Zenject;
@@ -34,6 +33,9 @@ namespace Source.GameLogic.Weapon
             }
         }
 
+        private void Reset() =>
+            _elapsedTimeAfterSpawn = 0;
+
         private void UpdateElapseTime() =>
             _elapsedTimeAfterSpawn += Time.deltaTime;
 
@@ -67,7 +69,7 @@ namespace Source.GameLogic.Weapon
             {
                 item._memoryPool = null;
                 item.gameObject.SetActive(false);
-                item._elapsedTimeAfterSpawn = 0;
+                item.Reset();
             }
         }
     }

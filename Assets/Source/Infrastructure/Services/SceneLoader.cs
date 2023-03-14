@@ -18,7 +18,7 @@ namespace Source.Infrastructure.Services
             _coroutineRunner.StartCoroutine(Load(sceneName, onLoaded));
         }
 
-        private IEnumerator Load(string sceneName, Action OnLoaded)
+        private IEnumerator Load(string sceneName, Action OnLoaded = null)
         {
             var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 

@@ -1,5 +1,4 @@
-﻿using Mono.Cecil;
-using Source.GameLogic.Asteroids;
+﻿using Source.GameLogic.Asteroids;
 using UnityEngine;
 
 namespace Source.Infrastructure.AssetManagement
