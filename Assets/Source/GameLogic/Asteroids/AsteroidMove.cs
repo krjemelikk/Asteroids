@@ -1,4 +1,4 @@
-﻿using Source.Infrastructure.Services;
+﻿using Source.Infrastructure.Services.Random;
 using UnityEngine;
 using Zenject;
 

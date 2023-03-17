@@ -4,13 +4,13 @@ namespace Source.Infrastructure.StateMachine.States
 {
     public class LoadLevelState : IConfigurableState<string>
     {
-        private readonly IGameStateMachine _stateMachine;
+        private readonly IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
 
-        public LoadLevelState(IGameStateMachine stateMachine, ISceneLoader sceneLoader, LoadingCurtain loadingCurtain)
+        public LoadLevelState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, LoadingCurtain loadingCurtain)
         {
-            _stateMachine = stateMachine;
+            _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingCurtain = loadingCurtain;
         }
@@ -18,7 +18,7 @@ namespace Source.Infrastructure.StateMachine.States
         public void Enter(string sceneName)
         {
             _loadingCurtain.Show();
-            _sceneLoader.LoadScene(sceneName,null);
+            _sceneLoader.LoadScene(sceneName);
         }
 
         public void Exit()

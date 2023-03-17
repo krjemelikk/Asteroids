@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Source.Infrastructure.Services
+namespace Source.Infrastructure.Services.Input
 {
     public class InputService : IInputService
     {
@@ -8,12 +8,12 @@ namespace Source.Infrastructure.Services
         private const string VerticalAxis = "Vertical";
 
         public float Horizontal =>
-            Input.GetAxis(HorizontalAxis);
+            UnityEngine.Input.GetAxis(HorizontalAxis);
 
         public float Vertical =>
-            Input.GetAxis(VerticalAxis);
+            UnityEngine.Input.GetAxis(VerticalAxis);
 
         public bool IsAttackButtonDown =>
-            Input.GetKey(KeyCode.Space);
+            UnityEngine.Input.GetKey(KeyCode.Space);
     }
 }

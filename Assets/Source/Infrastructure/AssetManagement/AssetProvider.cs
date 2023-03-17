@@ -15,7 +15,7 @@ namespace Source.Infrastructure.AssetManagement
             var handle = Addressables.InitializeAsync();
             await handle.Task;
         }
-        
+
         public async Task<T> Load<T>(string address) where T : class
         {
             if (_completedCache.TryGetValue(address, out AsyncOperationHandle cacheHandle))
@@ -62,14 +62,10 @@ namespace Source.Infrastructure.AssetManagement
         private void AddHandle<T>(string key, AsyncOperationHandle handle) where T : class
         {
             if (_handles.TryGetValue(key, out List<AsyncOperationHandle> handles))
-            {
                 handles.Add(handle);
-            }
 
             else
-            {
                 _handles[key] = new List<AsyncOperationHandle>() { handle };
-            }
         }
     }
 }

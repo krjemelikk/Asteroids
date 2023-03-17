@@ -15,15 +15,12 @@ namespace Source.Infrastructure
 
         private IGameStateMachine _gameStateMachine;
         private IGameFactory _gameFactory;
-        private IGameplayModeService _gameplayModeService;
 
         [Inject]
-        private void Construct(IGameStateMachine gameStateMachine, IGameFactory gameFactory,
-            IGameplayModeService gameplayModeService)
+        private void Construct(IGameStateMachine gameStateMachine, IGameFactory gameFactory)
         {
             _gameStateMachine = gameStateMachine;
             _gameFactory = gameFactory;
-            _gameplayModeService = gameplayModeService;
         }
 
         private async Task Start()

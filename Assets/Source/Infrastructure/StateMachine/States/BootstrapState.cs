@@ -1,5 +1,5 @@
 ﻿using Source.Infrastructure.AssetManagement;
-using Source.Infrastructure.Services;
+using Source.Infrastructure.Services.StaticData;
 
 namespace Source.Infrastructure.StateMachine.States
 {
@@ -7,18 +7,19 @@ namespace Source.Infrastructure.StateMachine.States
     {
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IAssetProvider _assetProvider;
-        private readonly ICoroutineRunner _coroutineRunner;
+        private readonly IStaticDataService _dataService;
 
-        public BootstrapState(IGameStateMachine gameStateMachine, IAssetProvider assetProvider, ICoroutineRunner coroutineRunner)
+        public BootstrapState(IGameStateMachine gameStateMachine, IAssetProvider assetProvider, IStaticDataService dataService)
         {
             _gameStateMachine = gameStateMachine;
             _assetProvider = assetProvider;
-            _coroutineRunner = coroutineRunner;
+            _dataService = dataService;
         }
 
         public void Enter()
         { 
             _assetProvider.Initialize();
+            _dataService.Load();
             
             _gameStateMachine.Enter<LoadLevelState, string>(SceneName.Main);
         }

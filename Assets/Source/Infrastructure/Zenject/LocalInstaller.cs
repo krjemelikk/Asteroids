@@ -2,6 +2,7 @@
 using Source.GameLogic.Weapon;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Factory;
+using Source.Infrastructure.Services.StaticData;
 using Source.StaticData;
 using Zenject;
 
@@ -18,9 +19,9 @@ namespace Source.Infrastructure.Zenject
 
             BulletPool();
 
-            AsteroidSpawner(DataForSpawner());
-         
             AsteroidPool();
+
+            AsteroidSpawner(DataForSpawner());
         }
 
         private void GameFactory() =>
@@ -33,7 +34,7 @@ namespace Source.Infrastructure.Zenject
                 .FromComponentInNewPrefabResource(AssetAddress.BulletPrefabPath)
                 .UnderTransformGroup(BulletPoolTransform);
         }
-        
+
         private void AsteroidPool()
         {
             Container
@@ -50,13 +51,7 @@ namespace Source.Infrastructure.Zenject
                 .WithArguments(data);
         }
 
-        private AsteroidSpawnerData DataForSpawner()
-        {
-            var data = new AsteroidSpawnerData();
-            data.SpawnRadius = 15;
-            data.SpawnCooldown = 0.5f;
-
-            return data;
-        }
+        private AsteroidSpawnerData DataForSpawner() =>
+            Container.Resolve<IStaticDataService>().ForSpawner();
     }
 }

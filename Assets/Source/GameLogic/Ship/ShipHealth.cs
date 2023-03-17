@@ -5,8 +5,8 @@ namespace Source.GameLogic.Ship
 {
     public class ShipHealth : MonoBehaviour, IHealth
     {
-        public float MaxHp { get; set; }
         public FloatReactiveProperty CurrentHp { get; set; } = new();
+        public float MaxHp { get; set; }
 
         public void TakeDamage(float damage)
         {

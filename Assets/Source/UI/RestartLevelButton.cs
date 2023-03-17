@@ -17,15 +17,11 @@ namespace Source.UI
         {
             _gameStateMachine = gameStateMachine;
         }
-        
-        private void Awake()
-        {
-            _button.onClick.AddListener(RestartLevel);
-        }
 
-        private void RestartLevel()
-        {
+        private void Awake() =>
+            _button.onClick.AddListener(RestartLevel);
+
+        private void RestartLevel() =>
             _gameStateMachine.Enter<LoadLevelState, string>(SceneName.Main);
-        }
     }
 }

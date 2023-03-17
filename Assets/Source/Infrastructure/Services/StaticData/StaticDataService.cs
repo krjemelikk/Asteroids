@@ -4,7 +4,7 @@ using Source.GameLogic.Asteroids;
 using Source.StaticData;
 using UnityEngine;
 
-namespace Source.Infrastructure.Services
+namespace Source.Infrastructure.Services.StaticData
 {
     class StaticDataService : IStaticDataService
     {

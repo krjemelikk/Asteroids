@@ -1,5 +1,5 @@
 ﻿using Source.GameLogic.Weapon;
-using Source.Infrastructure.Services;
+using Source.Infrastructure.Services.Input;
 using UnityEngine;
 using Zenject;
 
@@ -7,8 +7,9 @@ namespace Source.GameLogic.Ship
 {
     public class ShipAttack : MonoBehaviour
     {
-        private IInputService _inputService;
         private Bullet.Pool _bulletPool;
+        private IInputService _inputService;
+
         private float _cooldown;
 
         public float AttackCoolDown { get; set; }
@@ -27,19 +28,21 @@ namespace Source.GameLogic.Ship
 
             if (_inputService.IsAttackButtonDown && CanAttack())
             {
-                Shoot();
+                Attack();
             }
         }
 
-        private void Shoot()
+        private void Attack()
         {
             var bullet = _bulletPool.Spawn();
-
             SetPosition(bullet);
-            bullet.Rigidbody2D.AddForce(transform.up * ShotForce);
+            Shoot(bullet);
 
             ResetCooldown();
         }
+
+        private void Shoot(Bullet bullet) =>
+            bullet.Rigidbody2D.AddForce(transform.up * ShotForce);
 
         private bool CanAttack() =>
             CooldownIsUp();

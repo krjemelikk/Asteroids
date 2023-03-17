@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Source.GameLogic.Ship;
 using Source.Infrastructure.AssetManagement;
-using Source.Infrastructure.Services;
+using Source.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -11,15 +11,13 @@ namespace Source.Infrastructure.Factory
     {
         private readonly DiContainer _diContainer;
         private readonly IAssetProvider _assetProvider;
-        private readonly IStaticDataService _staticDataService;
+        private readonly IStaticDataService _staticData;
 
-        public GameFactory(DiContainer diContainer, IAssetProvider assetProvider, IStaticDataService staticDataService)
+        public GameFactory(DiContainer diContainer, IAssetProvider assetProvider, IStaticDataService staticData)
         {
             _diContainer = diContainer;
             _assetProvider = assetProvider;
-            _staticDataService = staticDataService;
-            
-            staticDataService.Load();
+            _staticData = staticData;
         }
 
         public async Task<GameObject> CreateShip(Vector3 at)
@@ -27,7 +25,7 @@ namespace Source.Infrastructure.Factory
             var shipPrefab = await _assetProvider.Load<Object>(AssetAddress.ShipPrefabPath);
             var ship = _diContainer.InstantiatePrefab(shipPrefab, at, Quaternion.identity, null);
 
-            var shipData = _staticDataService.ForShip();
+            var shipData = _staticData.ForShip();
 
             var shipMove = ship.GetComponent<ShipMove>();
             shipMove.Speed = shipData.Speed;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Source.GameLogic.Ship;
-using Source.Infrastructure.Services;
+using Source.Infrastructure.Services.Random;
+using Source.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -8,9 +9,11 @@ namespace Source.GameLogic.Asteroids
 {
     public class Asteroid : MonoBehaviour
     {
-        [SerializeField] private AsteroidMove _move; 
+        [SerializeField] private AsteroidMove _move;
         private IMemoryPool _memoryPool;
+
         private float _elapsedTimeAfterSpawn;
+        private bool _isActive;
 
         public float LifeTime { get; set; }
         public float Damage { get; set; }
@@ -27,7 +30,7 @@ namespace Source.GameLogic.Asteroids
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<IHealth>(out IHealth ship))
+            if (other.TryGetComponent<IHealth>(out IHealth ship) && _isActive)
             {
                 ship.TakeDamage(Damage);
                 _memoryPool.Despawn(this);
@@ -80,12 +83,14 @@ namespace Source.GameLogic.Asteroids
 
             protected override void OnSpawned(Asteroid item)
             {
+                item._isActive = true;
                 item._memoryPool = this;
                 item.gameObject.SetActive(true);
             }
 
             protected override void OnDespawned(Asteroid item)
             {
+                item._isActive = false;
                 item._memoryPool = null;
                 item.gameObject.SetActive(false);
                 item.Reset();

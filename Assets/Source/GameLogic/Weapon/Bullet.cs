@@ -1,5 +1,5 @@
 ﻿using Source.GameLogic.Asteroids;
-using Source.Infrastructure.Services;
+using Source.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +9,9 @@ namespace Source.GameLogic.Weapon
     {
         [SerializeField] private Rigidbody2D _rigidbody2D;
         private IMemoryPool _memoryPool;
+
         private float _elapsedTimeAfterSpawn;
+        private bool _isActive;
 
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public float LifeTime { get; set; }
@@ -26,10 +28,10 @@ namespace Source.GameLogic.Weapon
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<Asteroid>(out Asteroid attack))
+            if (other.TryGetComponent<Asteroid>(out Asteroid attack) && _isActive)
             {
                 Destroy(other.gameObject);
-                _memoryPool?.Despawn(this);
+                _memoryPool.Despawn(this);
             }
         }
 
@@ -61,12 +63,14 @@ namespace Source.GameLogic.Weapon
 
             protected override void OnSpawned(Bullet item)
             {
+                item._isActive = true;
                 item._memoryPool = this;
                 item.gameObject.SetActive(true);
             }
 
             protected override void OnDespawned(Bullet item)
             {
+                item._isActive = false;
                 item._memoryPool = null;
                 item.gameObject.SetActive(false);
                 item.Reset();

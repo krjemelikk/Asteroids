@@ -5,8 +5,6 @@ public class HpBar : MonoBehaviour
 {
     [SerializeField] private Image _current;
 
-    public void SetValue(float maxHp, float currentHp)
-    {
+    public void SetValue(float maxHp, float currentHp) =>
         _current.fillAmount = currentHp / maxHp;
-    }
 }

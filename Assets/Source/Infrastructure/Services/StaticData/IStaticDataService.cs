@@ -1,7 +1,7 @@
 ﻿using Source.GameLogic.Asteroids;
 using Source.StaticData;
 
-namespace Source.Infrastructure.Services
+namespace Source.Infrastructure.Services.StaticData
 {
     public interface IStaticDataService
     {

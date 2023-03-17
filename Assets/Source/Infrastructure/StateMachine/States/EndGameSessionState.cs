@@ -10,7 +10,7 @@
             _gameStateMachine = gameStateMachine;
             _gameOverScreen = gameOverScreen;
         }
-        
+
         public void Enter()
         {
             _gameOverScreen.Show();

@@ -1,4 +1,4 @@
-﻿namespace Source.Infrastructure.Services
+﻿namespace Source.Infrastructure.Services.Input
 {
     public interface IInputService
     {

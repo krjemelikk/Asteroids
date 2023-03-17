@@ -5,12 +5,12 @@ namespace Source.Infrastructure.StateMachine.States
 {
     public class GameLoopState : IConfigurableState<GameSessionConfig>, ITickable
     {
-        private readonly IGameStateMachine _stateMachine;
+        private readonly IGameStateMachine _gameStateMachine;
         private readonly IGameplayModeService _gameplayModeService;
 
-        public GameLoopState(IGameStateMachine stateMachine, IGameplayModeService gameplayModeService)
+        public GameLoopState(IGameStateMachine gameStateMachine, IGameplayModeService gameplayModeService)
         {
-            _stateMachine = stateMachine;
+            _gameStateMachine = gameStateMachine;
             _gameplayModeService = gameplayModeService;
         }
 
@@ -24,7 +24,7 @@ namespace Source.Infrastructure.StateMachine.States
         {
             if (_gameplayModeService.IsSessionEnd())
             {
-                _stateMachine.Enter<EndGameSessionState>();
+                _gameStateMachine.Enter<EndGameSessionState>();
             }
         }
     }
