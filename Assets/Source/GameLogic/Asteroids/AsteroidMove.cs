@@ -18,12 +18,7 @@ namespace Source.GameLogic.Asteroids
             _randomService = randomService;
         }
 
-        private void Start()
-        {
-            Move();
-        }
-
-        private void Move() =>
+        public void Move() =>
             _rigidbody.AddForce(MoveDirection() * RandomSpeed(MinSpeed, MaxSpeed));
 
         private Vector3 MoveDirection() =>

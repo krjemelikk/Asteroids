@@ -1,12 +1,13 @@
-﻿using Source.GameLogic.Asteroids;
-using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 
 namespace Source.Infrastructure.AssetManagement
 {
     public interface IAssetProvider
     {
-        Object ShipPrefab();
-        Object HUDPrefab();
-        Object AsteroidPrefab(AsteroidTypeId typeId);
+        Task Initialize();
+        Task<T> Load<T>(string address) where T : class;
+        Task<T> Load<T>(AssetReference reference) where T : class;
+        void CleanUp();
     }
 }

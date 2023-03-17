@@ -1,4 +1,6 @@
-﻿using Source.GameLogic.Asteroids;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Source.GameLogic.Asteroids;
 using Source.StaticData;
 using UnityEngine;
 
@@ -8,9 +10,15 @@ namespace Source.Infrastructure.Services
     {
         private const string ShipDataPath = "StaticData/Ship";
         private const string BulletDataPath = "StaticData/Bullet";
-        private const string AsteroidDataPath = "StaticData/Asteroid";
-        private const string BigAsteroidDataPath = "StaticData/BigAsteroid";
+        private const string AsteroidsDataPath = "StaticData/Asteroids";
         private const string AsteroidSpawnerDataPath = "StaticData/AsteroidSpawner";
+
+        private Dictionary<AsteroidTypeId, AsteroidData> _asteroids;
+
+        public void Load()
+        {
+            LoadAsteroids();
+        }
 
         public ShipData ForShip() =>
             Resources.Load<ShipData>(ShipDataPath);
@@ -19,22 +27,16 @@ namespace Source.Infrastructure.Services
             Resources.Load<BulletData>(BulletDataPath);
 
         public AsteroidData ForAsteroid(AsteroidTypeId id) =>
-            Resources.Load<AsteroidData>(AsteroidPath(id));
+            _asteroids.TryGetValue(id, out AsteroidData data) ? data : null;
 
         public AsteroidSpawnerData ForSpawner() =>
             Resources.Load<AsteroidSpawnerData>(AsteroidSpawnerDataPath);
 
-        private string AsteroidPath(AsteroidTypeId id)
+        private void LoadAsteroids()
         {
-            switch (id)
-            {
-                case AsteroidTypeId.Asteroid:
-                    return AsteroidDataPath;
-                case AsteroidTypeId.BigAsteroid:
-                    return BigAsteroidDataPath;
-                default:
-                    return null;
-            }
+            _asteroids = Resources
+                .LoadAll<AsteroidData>(AsteroidsDataPath)
+                .ToDictionary(x => x.AsteroidId, x => x);
         }
     }
 }

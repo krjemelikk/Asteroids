@@ -1,4 +1,4 @@
-﻿using Source.GameLogic.Asteroids;
+﻿using System.Threading.Tasks;
 using Source.GameLogic.Ship;
 using Source.Infrastructure.AssetManagement;
 using Source.Infrastructure.Services;
@@ -13,17 +13,18 @@ namespace Source.Infrastructure.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
 
-        public GameFactory(DiContainer diContainer, IAssetProvider assetProvider,
-            IStaticDataService staticDataService)
+        public GameFactory(DiContainer diContainer, IAssetProvider assetProvider, IStaticDataService staticDataService)
         {
             _diContainer = diContainer;
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
+            
+            staticDataService.Load();
         }
 
-        public GameObject CreateShip(Vector3 at)
+        public async Task<GameObject> CreateShip(Vector3 at)
         {
-            var shipPrefab = _assetProvider.ShipPrefab();
+            var shipPrefab = await _assetProvider.Load<Object>(AssetAddress.ShipPrefabPath);
             var ship = _diContainer.InstantiatePrefab(shipPrefab, at, Quaternion.identity, null);
 
             var shipData = _staticDataService.ForShip();
@@ -43,28 +44,10 @@ namespace Source.Infrastructure.Factory
             return ship;
         }
 
-        public GameObject CreateHUD()
+        public async Task<GameObject> CreateHUD()
         {
-            var hudPrefab = _assetProvider.HUDPrefab();
+            var hudPrefab = await _assetProvider.Load<Object>(AssetAddress.HUDPrefabPath);
             return _diContainer.InstantiatePrefab(hudPrefab);
-        }
-
-        public GameObject CreateAsteroid(AsteroidTypeId id, Vector3 at)
-        {
-            var asteroidPrefab = _assetProvider.AsteroidPrefab(id);
-            var asteroid = _diContainer.InstantiatePrefab(asteroidPrefab, at, Quaternion.identity, null);
-
-            var asteroidData = _staticDataService.ForAsteroid(id);
-
-            var asteroidComponent = asteroid.GetComponent<Asteroid>();
-            asteroidComponent.Damage = asteroidData.Damage;
-            asteroidComponent.LifeTime = asteroidData.LifeTime;
-
-            var asteroidMove = asteroid.GetComponent<AsteroidMove>();
-            asteroidMove.MaxSpeed = asteroidData.MaxSpeed;
-            asteroidMove.MinSpeed = asteroidData.MinSpeed;
-
-            return asteroid;
         }
     }
 }

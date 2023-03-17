@@ -16,7 +16,43 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 9b1c2d3de41fd35418a340bfe01fa8a4
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: b72c353ed42ac6447b347a4d5f2b4fff
+    m_Address: Asteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0ecf9bebac6a7684e9572a2aa1a6028a
+    m_Address: Ship
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e81726d21d0c8c747aed1893c5f067f5
+    m_Address: Ship
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6de58c12aa3919d4787f497f14afce03
+    m_Address: Bullet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fd015fa756dbe924dacfd2065c53f069
+    m_Address: BigAsteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e8d4a9b1c411c8f4e84c4e079f145258
+    m_Address: AsteroidSpawner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7368e1a0243df5f4db441125866ad647
+    m_Address: Asteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c66b5e931c361c429cbf0acf8d778a1
+    m_Address: HUD
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 047813a01f9f97448a85042445284c00
+    m_Address: Bullet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 75f7018e191a915488a929a0063c1635, type: 2}
   m_SchemaSet:

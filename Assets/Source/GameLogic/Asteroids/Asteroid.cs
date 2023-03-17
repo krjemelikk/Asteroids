@@ -1,10 +1,15 @@
-﻿using Source.GameLogic.Ship;
+﻿using System;
+using Source.GameLogic.Ship;
+using Source.Infrastructure.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Source.GameLogic.Asteroids
 {
     public class Asteroid : MonoBehaviour
     {
+        [SerializeField] private AsteroidMove _move; 
+        private IMemoryPool _memoryPool;
         private float _elapsedTimeAfterSpawn;
 
         public float LifeTime { get; set; }
@@ -16,7 +21,16 @@ namespace Source.GameLogic.Asteroids
 
             if (LifeTimeIsOver())
             {
-                Destroy(this);
+                _memoryPool.Despawn(this);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<IHealth>(out IHealth ship))
+            {
+                ship.TakeDamage(Damage);
+                _memoryPool.Despawn(this);
             }
         }
 
@@ -26,13 +40,59 @@ namespace Source.GameLogic.Asteroids
         private bool LifeTimeIsOver() =>
             _elapsedTimeAfterSpawn >= LifeTime;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void Reset() =>
+            _elapsedTimeAfterSpawn = 0;
+
+        public class Pool : MemoryPool<Vector3, Asteroid>
         {
-            if (other.TryGetComponent<IHealth>(out IHealth ship))
+            private readonly Array _asteroids;
+            private readonly IStaticDataService _staticData;
+            private readonly IRandomService _randomService;
+
+            public Pool(IStaticDataService staticData, IRandomService randomService)
             {
-                ship.TakeDamage(Damage);
-                Destroy(this);
+                _asteroids = Enum.GetValues(typeof(AsteroidTypeId));
+                _staticData = staticData;
+                _randomService = randomService;
             }
+
+            protected override void OnCreated(Asteroid item)
+            {
+                var randomType = RandomAsteroidType();
+                var asteroidData = _staticData.ForAsteroid(randomType);
+
+                var asteroidComponent = item.GetComponent<Asteroid>();
+                asteroidComponent.Damage = asteroidData.Damage;
+                asteroidComponent.LifeTime = asteroidData.LifeTime;
+
+                var asteroidMove = item.GetComponent<AsteroidMove>();
+                asteroidMove.MaxSpeed = asteroidData.MaxSpeed;
+                asteroidMove.MinSpeed = asteroidData.MinSpeed;
+
+                item.transform.localScale = asteroidData.Scale;
+            }
+
+            protected override void Reinitialize(Vector3 position, Asteroid item)
+            {
+                item.transform.position = position;
+                item._move.Move();
+            }
+
+            protected override void OnSpawned(Asteroid item)
+            {
+                item._memoryPool = this;
+                item.gameObject.SetActive(true);
+            }
+
+            protected override void OnDespawned(Asteroid item)
+            {
+                item._memoryPool = null;
+                item.gameObject.SetActive(false);
+                item.Reset();
+            }
+
+            private AsteroidTypeId RandomAsteroidType() =>
+                (AsteroidTypeId)_asteroids.GetValue(_randomService.Next(0, _asteroids.Length));
         }
     }
 }

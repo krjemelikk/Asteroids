@@ -1,7 +1,4 @@
-﻿using System;
-using Source.Infrastructure.Factory;
-using Source.Infrastructure.Services;
-using Source.Infrastructure.Zenject;
+﻿using Source.Infrastructure.Services;
 using Source.StaticData;
 using UnityEngine;
 using Zenject;
@@ -10,8 +7,7 @@ namespace Source.GameLogic.Asteroids
 {
     public class AsteroidSpawner : ITickable
     {
-        private readonly Array _asteroids;
-        private readonly IGameFactory _gameFactory;
+        private readonly Asteroid.Pool _pool;
         private readonly IRandomService _randomService;
 
         private float _cooldown;
@@ -19,11 +15,10 @@ namespace Source.GameLogic.Asteroids
         public float SpawnCooldown { get; set; }
 
 
-        public AsteroidSpawner(IGameFactory gameFactory, IRandomService randomService, AsteroidSpawnerData data)
+        public AsteroidSpawner(Asteroid.Pool pool, IRandomService randomService, AsteroidSpawnerData data)
         {
-            _asteroids = Enum.GetValues(typeof(AsteroidTypeId));
-            _gameFactory = gameFactory;
             _randomService = randomService;
+            _pool = pool;
 
             SpawnRadius = data.SpawnRadius;
             SpawnCooldown = data.SpawnCooldown;
@@ -35,14 +30,14 @@ namespace Source.GameLogic.Asteroids
 
             if (CooldownIsUp())
             {
-                Spawn(RandomAsteroidType(), RandomPosition(SpawnRadius));
+                Spawn(RandomPosition(SpawnRadius));
             }
         }
 
 
-        private void Spawn(AsteroidTypeId typeId, Vector3 position)
+        private void Spawn(Vector3 position)
         {
-            _gameFactory.CreateAsteroid(typeId, position);
+            _pool.Spawn(position);
             ResetCooldown();
         }
 
@@ -54,9 +49,6 @@ namespace Source.GameLogic.Asteroids
 
             return new Vector3(cos * radius, sin * radius);
         }
-
-        private AsteroidTypeId RandomAsteroidType() =>
-            (AsteroidTypeId)_asteroids.GetValue(_randomService.Next(0, _asteroids.Length));
 
         private bool CooldownIsUp() =>
             _cooldown <= 0;

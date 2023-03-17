@@ -1,4 +1,4 @@
-﻿using Source.GameLogic.Asteroids;
+﻿using System.Threading.Tasks;
 using Source.GameLogic.Ship;
 using Source.Infrastructure.Factory;
 using Source.Infrastructure.Services;
@@ -26,27 +26,27 @@ namespace Source.Infrastructure
             _gameplayModeService = gameplayModeService;
         }
 
-        private void Start()
+        private async Task Start()
         {
-            var sessionConfig = InitGameWorld();
+            var sessionConfig = await InitGameWorld();
 
             _gameStateMachine.Enter<GameLoopState, GameSessionConfig>(sessionConfig);
         }
 
-        private GameSessionConfig InitGameWorld()
+        private async Task<GameSessionConfig> InitGameWorld()
         {
-            var ship = InitShip();
-            InitHUD(ship.GetComponent<IHealth>());
+            var ship = await InitShip();
+            await InitHUD(ship.GetComponent<IHealth>());
 
             return new GameSessionConfig(ship.GetComponent<IHealth>());
         }
 
-        private GameObject InitShip() =>
-            _gameFactory.CreateShip(InitialPoint.position);
+        private async Task<GameObject> InitShip() =>
+            await _gameFactory.CreateShip(InitialPoint.position);
 
-        private GameObject InitHUD(IHealth playerHealth)
+        private async Task<GameObject> InitHUD(IHealth playerHealth)
         {
-            var hud =  _gameFactory.CreateHUD();
+            var hud = await _gameFactory.CreateHUD();
             hud.GetComponent<ActorUI>().Init(playerHealth);
             return hud;
         }

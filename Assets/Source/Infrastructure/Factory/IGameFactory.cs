@@ -1,12 +1,11 @@
-﻿using Source.GameLogic.Asteroids;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Source.Infrastructure.Factory
 {
     public interface IGameFactory
     {
-        GameObject CreateShip(Vector3 at);
-        GameObject CreateHUD();
-        GameObject CreateAsteroid(AsteroidTypeId typeId, Vector3 position);
+        Task<GameObject> CreateShip(Vector3 at);
+        Task<GameObject> CreateHUD();
     }
 }

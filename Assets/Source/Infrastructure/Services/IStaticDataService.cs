@@ -5,6 +5,7 @@ namespace Source.Infrastructure.Services
 {
     public interface IStaticDataService
     {
+        void Load();
         ShipData ForShip();
         BulletData ForBullet();
         AsteroidData ForAsteroid(AsteroidTypeId id);
