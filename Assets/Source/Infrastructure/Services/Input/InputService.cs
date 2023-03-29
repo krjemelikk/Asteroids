@@ -1,19 +1,13 @@
-﻿using UnityEngine;
-
-namespace Source.Infrastructure.Services.Input
+﻿namespace Source.Infrastructure.Services.Input
 {
-    public class InputService : IInputService
+    public abstract class InputService : IInputService
     {
-        private const string HorizontalAxis = "Horizontal";
-        private const string VerticalAxis = "Vertical";
+        protected const string HorizontalAxis = "Horizontal";
+        protected const string VerticalAxis = "Vertical";
+        protected const string AttackButton = "Attack";
 
-        public float Horizontal =>
-            UnityEngine.Input.GetAxis(HorizontalAxis);
-
-        public float Vertical =>
-            UnityEngine.Input.GetAxis(VerticalAxis);
-
-        public bool IsAttackButtonDown =>
-            UnityEngine.Input.GetKey(KeyCode.Space);
+        public abstract float Horizontal { get; }
+        public abstract float Vertical { get; }
+        public abstract bool IsAttackButtonDown { get; }
     }
 }

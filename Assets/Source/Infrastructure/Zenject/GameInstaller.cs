@@ -5,6 +5,7 @@ using Source.Infrastructure.Services.Random;
 using Source.Infrastructure.Services.StaticData;
 using Source.Infrastructure.StateMachine;
 using Source.Infrastructure.StateMachine.States.Factory;
+using UnityEngine;
 using Zenject;
 
 namespace Source.Infrastructure.Zenject
@@ -50,11 +51,17 @@ namespace Source.Infrastructure.Zenject
                 .AsSingle();
         }
 
+        private void InputService()
+        {
+            if (Application.isEditor)
+                Container.BindInterfacesTo<StandaloneInputService>().AsSingle();
+
+            else
+                Container.BindInterfacesTo<MobileInputService>().AsSingle();
+        }
+
         private void SceneLoader() =>
             Container.BindInterfacesTo<SceneLoader>().AsSingle();
-
-        private void InputService() =>
-            Container.BindInterfacesTo<InputService>().AsSingle();
 
         private void AssetProvider() =>
             Container.BindInterfacesTo<AssetProvider>().AsSingle();
