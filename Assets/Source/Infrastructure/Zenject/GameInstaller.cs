@@ -54,7 +54,7 @@ namespace Source.Infrastructure.Zenject
         private void InputService()
         {
             if (Application.isEditor)
-                Container.BindInterfacesTo<StandaloneInputService>().AsSingle();
+                Container.BindInterfacesTo<MobileInputService>().AsSingle();
 
             else
                 Container.BindInterfacesTo<MobileInputService>().AsSingle();

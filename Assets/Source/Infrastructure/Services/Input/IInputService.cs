@@ -1,9 +1,10 @@
-﻿namespace Source.Infrastructure.Services.Input
+﻿using UnityEngine;
+
+namespace Source.Infrastructure.Services.Input
 {
     public interface IInputService
     {
-        float Horizontal { get; }
-        float Vertical { get; }
+        Vector2 Axis { get; }
         bool IsAttackButtonDown { get; }
     }
 }

@@ -1,12 +1,11 @@
-﻿namespace Source.Infrastructure.Services.Input
+﻿using UnityEngine;
+
+namespace Source.Infrastructure.Services.Input
 {
     public class MobileInputService : InputService
     {
-        public override float Horizontal =>
-            SimpleInput.GetAxis(HorizontalAxis);
-
-        public override float Vertical =>
-            SimpleInput.GetAxis(VerticalAxis);
+        public override Vector2 Axis =>
+            new Vector2(SimpleInput.GetAxis(HorizontalAxis), SimpleInput.GetAxis(VerticalAxis));
 
         public override bool IsAttackButtonDown =>
             SimpleInput.GetButton(AttackButton);

@@ -29,7 +29,6 @@ namespace Source.Infrastructure.Factory
 
             var shipMove = ship.GetComponent<ShipMove>();
             shipMove.Speed = shipData.Speed;
-            shipMove.RotationSpeed = shipData.RotationSpeed;
 
             var shipAttack = ship.GetComponent<ShipAttack>();
             shipAttack.AttackCoolDown = shipData.AttackCoolDown;

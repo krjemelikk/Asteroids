@@ -10,7 +10,6 @@ namespace Source.GameLogic.Ship
         private IInputService _inputService;
 
         public float Speed { get; set; }
-        public float RotationSpeed { get; set; }
 
         [Inject]
         private void Construct(IInputService inputService)
@@ -20,14 +19,16 @@ namespace Source.GameLogic.Ship
 
         private void FixedUpdate()
         {
-            Move(_inputService.Vertical);
-            Rotate(_inputService.Horizontal);
+            if (_inputService.Axis.sqrMagnitude > 0.001f)
+                Rotate(_inputService.Axis);
+
+            Move(_inputService.Axis);
         }
 
-        private void Move(float vertical) =>
-            _rigidbody.velocity = transform.up * vertical * Speed * Time.fixedDeltaTime;
+        private void Move(Vector2 axis) =>
+            _rigidbody.velocity = axis * Speed * Time.fixedDeltaTime;
 
-        private void Rotate(float horizontal) =>
-            transform.Rotate(-1 * transform.forward * horizontal * RotationSpeed * Time.fixedDeltaTime);
+        private void Rotate(Vector2 moveVector) =>
+            transform.up = moveVector;
     }
 }
