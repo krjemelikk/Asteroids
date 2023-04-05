@@ -22,7 +22,7 @@ namespace Source.GameLogic.Asteroids
         {
             UpdateElapseTime();
 
-            if (LifeTimeIsOver())
+            if (LifeTimeIsOver() && _memoryPool != null)
             {
                 _memoryPool.Despawn(this);
             }
@@ -32,8 +32,11 @@ namespace Source.GameLogic.Asteroids
         {
             if (other.TryGetComponent<IHealth>(out IHealth ship) && _isActive)
             {
-                ship.TakeDamage(Damage);
-                _memoryPool.Despawn(this);
+                if (_memoryPool != null)
+                {
+                    ship.TakeDamage(Damage);
+                    _memoryPool.Despawn(this);
+                }
             }
         }
 
