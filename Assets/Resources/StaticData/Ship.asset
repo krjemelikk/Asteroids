@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Ship
   m_EditorClassIdentifier: 
   HP: 100
-  Speed: 400
-  RotationSpeed: 300
+  Speed: 300
   AttackCoolDown: 0.2
   ShotForce: 550
